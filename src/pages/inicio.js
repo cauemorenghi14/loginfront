@@ -5,28 +5,28 @@ import Menu from "../components/Menu";
 
 const Inicio = () => {
 
-    const [mensagem, setmensagem] = useState("");
+  const [mensagem, setmensagem] = useState("");
 
-    const fetchMensagem = async () => {
-        try {
-            const token = consultarLS('token')
-            const response = await buscaToken(token)
-            setmensagem(response.data)
-        } catch (error) {
-            console.log('erro ao validar token')
-        }
+  const fetchMensagem = async () => {
+    try {
+      const token = consultarLS("token");
+      const response = await buscaToken(token);
+      setmensagem(response.data);
+    } catch (error) {
+      console.log("erro ao validar token");
     }
+  };
 
-    useEffect(() => {
-        fetchMensagem()
-    }, []);
+  useEffect(() => {
+    fetchMensagem();
+  }, []);
 
-    return ( 
-        <div>
-            <h1>{mensagem}</h1>
-            <Menu />
-        </div>
-     );
-}
- 
+  return (
+    <div>
+      <h1>{mensagem}</h1>
+      <Menu />
+    </div>
+  );
+};
+
 export default Inicio;

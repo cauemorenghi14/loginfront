@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -8,12 +8,16 @@ import Login from './pages/Login';
 import Inicio from './pages/inicio';
 import { UserContext } from './contexts/usercontext';
 import Usuarios from './pages/Usuarios';
-import { consultarLS } from './utils/functions';
+import { armazenarLS, consultarLS } from './utils/functions';
 import Perfil from './pages/Perfil';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const Root = () => {
+
+  useEffect(() => {
+    armazenarLS('janela', window.location.pathname)
+  }, []);
 
   const [token, settoken] = useState("");
   const [perfil, setperfil] = useState(`${consultarLS('perfil')}`);

@@ -3,10 +3,13 @@ import Menu from "../components/Menu";
 import { getUsers } from "../services/analytics";
 import { consultarLS } from "../utils/functions";
 import { UserContext } from "../contexts/usercontext";
-import { Edit } from "@mui/icons-material";
+import { Delete, Edit, FiberManualRecord } from "@mui/icons-material";
 import BasicModal from "../components/Edicao";
+import userFunctions from "../utils/users";
 
 const Usuarios = () => {
+
+    const { excluir } = userFunctions()
     
     const perfilLS = consultarLS('perfil')
 
@@ -26,6 +29,10 @@ const Usuarios = () => {
         usuarios()
     }, []);
 
+    const deletar = async (id) => {
+        await excluir(id)
+    }
+
     return ( 
         <div>
             <div>
@@ -37,7 +44,9 @@ const Usuarios = () => {
                             ?
                                 <div style={{ display: 'flex', gap: '.3em', alignItems: 'center'}}>
                                     <p>{user.username}</p>
-                                    <BasicModal />
+                                    <FiberManualRecord sx={{ color: `red` }}/>
+                                    <BasicModal placeholderUser={user.username} placeholderMail={user.email}/>
+                                    <Delete style={{ cursor: 'pointer' }} onClick={() => deletar(user.id)}/>
                                 </div>
                             :
                                 <div>

@@ -13,6 +13,11 @@ const registerUser = async (user) => {
     return response.data
 }
 
+const deleteUser = async (id) => {
+    const response = await api.delete(`users/${id}`)
+    return response
+}
+
 const loginUser = async (user) => {
     const response = await api.post('/login', user)
     return response
@@ -28,7 +33,7 @@ const buscaToken = async (token) => {
 }
 
 const logoutUser = async (token) => {
-    const response  = await api.post('/logout', {
+    const response = await api.post('/logout', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -41,5 +46,6 @@ export {
     loginUser,
     buscaToken,
     logoutUser,
-    getUsers
+    getUsers,
+    deleteUser
 }

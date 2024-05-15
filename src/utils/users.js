@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useNavigate } from "react-router-dom";
-import { loginUser, logoutUser, registerUser } from "../services/analytics";
+import { deleteUser, loginUser, logoutUser, registerUser } from "../services/analytics";
 import { armazenarLS } from "./functions";
 
 
@@ -17,13 +17,25 @@ const userFunctions = () => {
             alert('Erro ao registrar usuário')
         }
     }
+
+    const excluir = async (id) => {
+        try {
+            console.log(id)
+            await deleteUser(id)
+            window.location.reload()
+        } catch (error) {
+            alert('Erro ao deletar usuário')
+        }
+    }
     
     const login = async (user) => {
         try {
+            console.log(user)
             const usuario = { email: user.email, password: user.password }
             const response = await loginUser(usuario)
             const token = response.data.token
             armazenarLS('token', token)
+            armazenarLS('user', user.email)
             navigate('/perfil')
         } catch (error) {
             alert('erro ao logar')
@@ -39,7 +51,7 @@ const userFunctions = () => {
     }
 
     return {
-        registerSubmit, login, logout
+        registerSubmit, login, logout, excluir
     };
 }
  

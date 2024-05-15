@@ -17,7 +17,7 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal() {
+export default function BasicModal(props) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -32,12 +32,16 @@ export default function BasicModal() {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <form>
+              <h1>Editar usuário</h1>
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              <input type="text" placeholder={props.placeholderUser}/>
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              <input type="text" placeholder={props.placeholderMail}/>
+            </Typography>
+            <button>Editar</button>
+          </form>
         </Box>
       </Modal>
     </div>
